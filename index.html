@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pet&Style – Moda e Estilo para seu Pet</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Playfair Display', 'serif'],
+            body: ['DM Sans', 'sans-serif'],
+          },
+          colors: {
+            cream: '#FAF6F0',
+            caramel: '#C8894E',
+            bark: '#6B4226',
+            sage: '#7A9E7E',
+            blush: '#F2D4C2',
+            charcoal: '#2D2926',
+          },
+          animation: {
+            'fade-up': 'fadeUp 0.7s ease forwards',
+            'fade-in': 'fadeIn 0.6s ease forwards',
+          },
+          keyframes: {
+            fadeUp: {
+              '0%': { opacity: '0', transform: 'translateY(24px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' },
+            },
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    body { font-family: 'DM Sans', sans-serif; background-color: #FAF6F0; color: #2D2926; }
+    .font-display { font-family: 'Playfair Display', serif; }
+    .hero-bg {
+      background: linear-gradient(135deg, #FAF6F0 0%, #F2D4C2 60%, #C8894E22 100%);
+    }
+    .card-hover { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .card-hover:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(107,66,38,0.15); }
+    .nav-link { position: relative; }
+    .nav-link::after {
+      content: ''; position: absolute; left: 0; bottom: -2px;
+      width: 0; height: 2px; background: #C8894E;
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover::after { width: 100%; }
+    .btn-primary {
+      background: #C8894E;
+      color: white;
+      padding: 0.75rem 2rem;
+      border-radius: 9999px;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      transition: background 0.2s, transform 0.2s;
+      display: inline-block;
+    }
+    .btn-primary:hover { background: #6B4226; transform: scale(1.03); }
+    .btn-outline {
+      border: 2px solid #C8894E;
+      color: #C8894E;
+      padding: 0.65rem 1.75rem;
+      border-radius: 9999px;
+      font-weight: 500;
+      transition: all 0.2s;
+      display: inline-block;
+    }
+    .btn-outline:hover { background: #C8894E; color: white; }
+    .paw-bg::before {
+      content: '🐾';
+      position: absolute;
+      font-size: 10rem;
+      opacity: 0.05;
+      top: -2rem;
+      right: -2rem;
+      transform: rotate(-15deg);
+      pointer-events: none;
+    }
+    input, textarea {
+      background: white;
+      border: 1.5px solid #e5e0d8;
+      border-radius: 0.75rem;
+      padding: 0.75rem 1rem;
+      width: 100%;
+      font-family: 'DM Sans', sans-serif;
+      transition: border-color 0.2s;
+    }
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: #C8894E;
+    }
+    .section-tag {
+      display: inline-block;
+      background: #F2D4C2;
+      color: #6B4226;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.25rem 1rem;
+      border-radius: 9999px;
+      margin-bottom: 1rem;
+    }
+    .quote-mark { font-family: 'Playfair Display', serif; font-size: 4rem; line-height: 0; color: #C8894E; opacity: 0.4; }
+  </style>
+</head>
+<body class="antialiased">
+
+  <!-- ======== HEADER ======== -->
+  <header class="sticky top-0 z-50 bg-cream/90 backdrop-blur-sm border-b border-blush/60">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 md:h-20">
+
+        <!-- Logo -->
+        <a href="#" class="flex items-center gap-2">
+          <span class="text-2xl">🐾</span>
+          <span class="font-display text-xl md:text-2xl font-bold text-bark">Pet<span class="text-caramel">&</span>Style</span>
+        </a>
+
+        <!-- Desktop Nav -->
+        <nav class="hidden md:flex items-center gap-8">
+          <a href="#produtos" class="nav-link text-charcoal hover:text-caramel text-sm font-medium transition-colors">Produtos</a>
+          <a href="#depoimentos" class="nav-link text-charcoal hover:text-caramel text-sm font-medium transition-colors">Depoimentos</a>
+          <a href="#contato" class="nav-link text-charcoal hover:text-caramel text-sm font-medium transition-colors">Contato</a>
+          <a href="#contato" class="btn-primary text-sm">Fale Conosco</a>
+        </nav>
+
+        <!-- Mobile Menu Button -->
+        <button id="menu-btn" class="md:hidden p-2 rounded-lg text-charcoal hover:bg-blush transition-colors" aria-label="Menu">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile Nav -->
+      <div id="mobile-menu" class="hidden md:hidden pb-4">
+        <nav class="flex flex-col gap-3 pt-3 border-t border-blush">
+          <a href="#produtos" class="text-charcoal hover:text-caramel text-sm font-medium py-1 transition-colors" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Produtos</a>
+          <a href="#depoimentos" class="text-charcoal hover:text-caramel text-sm font-medium py-1 transition-colors" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Depoimentos</a>
+          <a href="#contato" class="text-charcoal hover:text-caramel text-sm font-medium py-1 transition-colors" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Contato</a>
+          <a href="#contato" class="btn-primary text-sm text-center mt-1">Fale Conosco</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- ======== HERO ======== -->
+  <section class="hero-bg relative overflow-hidden">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 lg:py-32">
+      <div class="flex flex-col md:flex-row items-center gap-10 md:gap-16">
+
+        <!-- Text -->
+        <div class="flex-1 text-center md:text-left animate-fade-up">
+          <span class="section-tag">Nova coleção 2025</span>
+          <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-bark leading-tight mb-6">
+            Estilo e carinho<br/>
+            <em class="text-caramel not-italic">para quem você ama</em>
+          </h1>
+          <p class="text-charcoal/70 text-lg md:text-xl leading-relaxed mb-8 max-w-xl mx-auto md:mx-0">
+            Produtos selecionados com amor para fazer seu pet viver com conforto, elegância e muita personalidade. 🐶🐱
+          </p>
+          <div class="flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
+            <a href="#produtos" class="btn-primary text-base">Ver Produtos</a>
+            <a href="#contato" class="btn-outline text-base">Saiba Mais</a>
+          </div>
+          <div class="mt-10 flex items-center justify-center md:justify-start gap-6">
+            <div class="text-center">
+              <p class="font-display text-3xl font-bold text-bark">4.9★</p>
+              <p class="text-xs text-charcoal/60 mt-0.5">Avaliação média</p>
+            </div>
+            <div class="w-px h-10 bg-blush"></div>
+            <div class="text-center">
+              <p class="font-display text-3xl font-bold text-bark">+800</p>
+              <p class="text-xs text-charcoal/60 mt-0.5">Clientes felizes</p>
+            </div>
+            <div class="w-px h-10 bg-blush"></div>
+            <div class="text-center">
+              <p class="font-display text-3xl font-bold text-bark">+50</p>
+              <p class="text-xs text-charcoal/60 mt-0.5">Produtos únicos</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Image -->
+        <div class="flex-1 flex justify-center md:justify-end animate-fade-in">
+          <div class="relative">
+            <div class="absolute -inset-4 bg-caramel/10 rounded-[3rem] rotate-3"></div>
+            <img
+              src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=560&q=80"
+              alt="Cachorro feliz com estilo"
+              class="relative w-72 sm:w-80 md:w-96 lg:w-[420px] h-auto rounded-[2.5rem] object-cover shadow-2xl"
+            />
+            <!-- Floating badge -->
+            <div class="absolute -bottom-4 -left-4 bg-white rounded-2xl shadow-lg px-4 py-3 flex items-center gap-2">
+              <span class="text-2xl">🛍️</span>
+              <div>
+                <p class="text-xs font-medium text-charcoal">Frete grátis</p>
+                <p class="text-xs text-charcoal/60">acima de R$ 149</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== PRODUTOS ======== -->
+  <section id="produtos" class="py-16 md:py-24 bg-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <div class="text-center mb-12">
+        <span class="section-tag">Nossos Produtos</span>
+        <h2 class="font-display text-3xl md:text-4xl font-bold text-bark">Escolhas com muito estilo</h2>
+        <p class="mt-3 text-charcoal/60 max-w-xl mx-auto">Do básico ao luxuoso — tudo que seu pet precisa para viver bem e bonito.</p>
+      </div>
+
+      <!-- Grid de Produtos -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+        <!-- Card 1 -->
+        <div class="card-hover bg-cream rounded-2xl overflow-hidden border border-blush/60">
+          <div class="relative overflow-hidden h-52">
+            <img src="https://images.unsplash.com/photo-1601758123927-4a6d3b29b5af?w=400&q=80"
+              alt="Caminha Luxo" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"/>
+            <span class="absolute top-3 left-3 bg-sage text-white text-xs font-medium px-3 py-1 rounded-full">Mais vendido</span>
+          </div>
+          <div class="p-5">
+            <h3 class="font-display text-lg font-bold text-bark mb-1">Caminha Veludo Chic</h3>
+            <p class="text-charcoal/60 text-sm mb-4">Conforto e elegância em veludo premium, lavável na máquina.</p>
+            <div class="flex items-center justify-between">
+              <span class="text-caramel font-bold text-xl">R$ 189,90</span>
+              <button class="bg-bark text-cream text-xs px-3 py-1.5 rounded-full hover:bg-caramel transition-colors">Comprar</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="card-hover bg-cream rounded-2xl overflow-hidden border border-blush/60">
+          <div class="relative overflow-hidden h-52">
+            <img src="https://images.unsplash.com/photo-1576201836106-db1758fd1c97?w=400&q=80"
+              alt="Brinquedo Pet" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"/>
+            <span class="absolute top-3 left-3 bg-caramel text-white text-xs font-medium px-3 py-1 rounded-full">Novo</span>
+          </div>
+          <div class="p-5">
+            <h3 class="font-display text-lg font-bold text-bark mb-1">Kit Brinquedos Fun</h3>
+            <p class="text-charcoal/60 text-sm mb-4">5 brinquedos interativos para manter seu pet entretido e ativo.</p>
+            <div class="flex items-center justify-between">
+              <span class="text-caramel font-bold text-xl">R$ 79,90</span>
+              <button class="bg-bark text-cream text-xs px-3 py-1.5 rounded-full hover:bg-caramel transition-colors">Comprar</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="card-hover bg-cream rounded-2xl overflow-hidden border border-blush/60">
+          <div class="relative overflow-hidden h-52">
+            <img src="https://images.unsplash.com/photo-1583511655826-05700442b31b?w=400&q=80"
+              alt="Coleira Estilosa" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"/>
+          </div>
+          <div class="p-5">
+            <h3 class="font-display text-lg font-bold text-bark mb-1">Coleira Boho Luxe</h3>
+            <p class="text-charcoal/60 text-sm mb-4">Couro vegano com detalhes dourados. Disponível em 4 tamanhos.</p>
+            <div class="flex items-center justify-between">
+              <span class="text-caramel font-bold text-xl">R$ 124,90</span>
+              <button class="bg-bark text-cream text-xs px-3 py-1.5 rounded-full hover:bg-caramel transition-colors">Comprar</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="card-hover bg-cream rounded-2xl overflow-hidden border border-blush/60">
+          <div class="relative overflow-hidden h-52">
+            <img src="https://images.unsplash.com/photo-1598133894008-61f7fdb8cc3a?w=400&q=80"
+              alt="Roupa Pet" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"/>
+            <span class="absolute top-3 left-3 bg-blush text-bark text-xs font-medium px-3 py-1 rounded-full">-20% off</span>
+          </div>
+          <div class="p-5">
+            <h3 class="font-display text-lg font-bold text-bark mb-1">Casaco Winter Paws</h3>
+            <p class="text-charcoal/60 text-sm mb-4">Mantém seu pet aquecido no inverno com estilo e conforto total.</p>
+            <div class="flex items-center justify-between">
+              <div>
+                <span class="text-charcoal/40 text-sm line-through">R$ 99,90</span>
+                <span class="text-caramel font-bold text-xl ml-1">R$ 79,90</span>
+              </div>
+              <button class="bg-bark text-cream text-xs px-3 py-1.5 rounded-full hover:bg-caramel transition-colors">Comprar</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="text-center mt-10">
+        <a href="#" class="btn-outline">Ver todos os produtos</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== BANNER CENTRAL ======== -->
+  <section class="bg-bark py-14 relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle, #C8894E 1px, transparent 1px); background-size: 2rem 2rem;"></div>
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center relative">
+      <p class="text-blush font-display text-2xl md:text-3xl italic mb-3">"Porque seu pet merece o melhor"</p>
+      <p class="text-cream/70 text-sm md:text-base">Entrega em todo o Brasil • Troca grátis em até 30 dias • Pagamento parcelado</p>
+    </div>
+  </section>
+
+  <!-- ======== DEPOIMENTOS ======== -->
+  <section id="depoimentos" class="py-16 md:py-24 bg-cream">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <div class="text-center mb-12">
+        <span class="section-tag">Depoimentos</span>
+        <h2 class="font-display text-3xl md:text-4xl font-bold text-bark">O que dizem nossos clientes</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <!-- Depoimento 1 -->
+        <div class="bg-white rounded-2xl p-6 border border-blush shadow-sm relative paw-bg">
+          <span class="quote-mark">"</span>
+          <p class="text-charcoal/80 text-sm leading-relaxed mt-2 mb-6">
+            A caminha veludo chegou rapidíssimo e minha Mel não sai de lá! A qualidade surpreendeu demais. Com certeza vou comprar mais.
+          </p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-caramel/20 flex items-center justify-center text-lg font-bold text-caramel font-display">A</div>
+            <div>
+              <p class="font-medium text-bark text-sm">Ana Beatriz S.</p>
+              <p class="text-xs text-charcoal/50">Tutora da Mel 🐩</p>
+            </div>
+            <div class="ml-auto text-caramel text-sm">★★★★★</div>
+          </div>
+        </div>
+
+        <!-- Depoimento 2 -->
+        <div class="bg-white rounded-2xl p-6 border border-blush shadow-sm relative paw-bg">
+          <span class="quote-mark">"</span>
+          <p class="text-charcoal/80 text-sm leading-relaxed mt-2 mb-6">
+            Comprei o kit brinquedos pra minha gata e ela ama! Finalmente uma loja que entende que gatos também precisam de estilo. Recomendo demais!
+          </p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-sage/20 flex items-center justify-center text-lg font-bold text-sage font-display">R</div>
+            <div>
+              <p class="font-medium text-bark text-sm">Rafael Mendes</p>
+              <p class="text-xs text-charcoal/50">Tutor da Nala 🐈</p>
+            </div>
+            <div class="ml-auto text-caramel text-sm">★★★★★</div>
+          </div>
+        </div>
+
+        <!-- Depoimento 3 -->
+        <div class="bg-white rounded-2xl p-6 border border-blush shadow-sm relative paw-bg">
+          <span class="quote-mark">"</span>
+          <p class="text-charcoal/80 text-sm leading-relaxed mt-2 mb-6">
+            O casaco Winter Paws é lindo e muito prático. Meu cachorro fica estiloso no frio e eu fico tranquila. Atendimento da loja nota 10!
+          </p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-blush flex items-center justify-center text-lg font-bold text-bark font-display">C</div>
+            <div>
+              <p class="font-medium text-bark text-sm">Camila Ferreira</p>
+              <p class="text-xs text-charcoal/50">Tutora do Thor 🐕</p>
+            </div>
+            <div class="ml-auto text-caramel text-sm">★★★★★</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== CONTATO ======== -->
+  <section id="contato" class="py-16 md:py-24 bg-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <div class="text-center mb-12">
+        <span class="section-tag">Contato</span>
+        <h2 class="font-display text-3xl md:text-4xl font-bold text-bark">Fale com a gente</h2>
+        <p class="mt-3 text-charcoal/60 max-w-md mx-auto">Tem dúvidas ou quer saber mais sobre nossos produtos? Adoramos conversar!</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
+
+        <!-- Info -->
+        <div class="space-y-6">
+          <div class="flex items-start gap-4">
+            <div class="w-11 h-11 rounded-xl bg-blush flex items-center justify-center text-xl flex-shrink-0">📧</div>
+            <div>
+              <p class="font-medium text-bark">E-mail</p>
+              <p class="text-charcoal/60 text-sm">contato@petstyle.com.br</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="w-11 h-11 rounded-xl bg-blush flex items-center justify-center text-xl flex-shrink-0">📱</div>
+            <div>
+              <p class="font-medium text-bark">WhatsApp</p>
+              <p class="text-charcoal/60 text-sm">(11) 98765-4321</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="w-11 h-11 rounded-xl bg-blush flex items-center justify-center text-xl flex-shrink-0">🕐</div>
+            <div>
+              <p class="font-medium text-bark">Horário de Atendimento</p>
+              <p class="text-charcoal/60 text-sm">Seg – Sex: 9h às 18h<br/>Sáb: 9h às 13h</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="w-11 h-11 rounded-xl bg-blush flex items-center justify-center text-xl flex-shrink-0">📍</div>
+            <div>
+              <p class="font-medium text-bark">Localização</p>
+              <p class="text-charcoal/60 text-sm">São Paulo, SP – Brasil</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Formulário -->
+        <form class="space-y-4" onsubmit="handleSubmit(event)">
+          <div>
+            <label class="block text-sm font-medium text-bark mb-1.5" for="nome">Seu nome</label>
+            <input type="text" id="nome" placeholder="Como podemos te chamar?" required />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-bark mb-1.5" for="email">E-mail</label>
+            <input type="email" id="email" placeholder="seuemail@exemplo.com" required />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-bark mb-1.5" for="mensagem">Mensagem</label>
+            <textarea id="mensagem" rows="4" placeholder="Como podemos ajudar você e seu pet?" required></textarea>
+          </div>
+          <button type="submit" class="btn-primary w-full text-center text-base">Enviar Mensagem 🐾</button>
+          <div id="sucesso" class="hidden text-center text-sage font-medium text-sm mt-2">
+            ✅ Mensagem enviada! Em breve entraremos em contato.
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== FOOTER ======== -->
+  <footer class="bg-bark text-cream/80 py-10">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="flex items-center gap-2">
+          <span class="text-2xl">🐾</span>
+          <span class="font-display text-xl font-bold text-cream">Pet<span class="text-caramel">&</span>Style</span>
+        </div>
+        <p class="text-cream/50 text-sm text-center">© 2025 Pet&Style. Feito com 💛 para os melhores amigos do mundo.</p>
+        <div class="flex gap-4">
+          <a href="#" class="text-cream/60 hover:text-caramel transition-colors text-sm">Instagram</a>
+          <a href="#" class="text-cream/60 hover:text-caramel transition-colors text-sm">Facebook</a>
+          <a href="#" class="text-cream/60 hover:text-caramel transition-colors text-sm">TikTok</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // Form submit
+    function handleSubmit(e) {
+      e.preventDefault();
+      document.getElementById('sucesso').classList.remove('hidden');
+      e.target.reset();
+      setTimeout(() => document.getElementById('sucesso').classList.add('hidden'), 5000);
+    }
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
